@@ -6,9 +6,9 @@ Construye un e-commerce (sitio de comercio electrónico) con React a partir de c
 
 Se utilizará una API local basada en JSON (mock) para el desarrollo de la tienda. Por lo que deberás tenerla descargada en tu equipo y corriendo a modo local para poder realizar el proyecto.
 La URL con el backend a usar y la documentación es:
-[https://json-server-by-carloscordova-dev.onrender.com/](https://json-server-by-carloscordova-dev.onrender.com/)
+[https://github.com/cordovacarlos22/JSON-Server_by_carloscordova.dev-](https://github.com/cordovacarlos22/JSON-Server_by_carloscordova.dev-)
 
-Si no quieres usar la API en modo local, opcionalmente puedes usar mi deployment en: [https://ecommerce-json-jwt.onrender.com/](https://ecommerce-json-jwt.onrender.com/)
+Si no quieres usar la API en modo local, opcionalmente puedes usar mi deployment en: [https://json-server-by-carloscordova-dev.onrender.com/](https://json-server-by-carloscordova-dev.onrender.com/)
 
 ## REQUERIMIENTOS FUNCIONALES
 
