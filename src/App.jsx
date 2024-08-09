@@ -1,18 +1,19 @@
 import React from 'react'
-import { Button } from './components/ui/button'
+import { ProductsProvider } from './context/useProductsContext'
+import Nav from './components/Nav'
+
 
 const App = () => {
   return (
-    <div>
+    <>
+      <ProductsProvider>
+        <Nav />
+        test
+        {/* Your application components */}
 
-      <h1 className="text-red-500">
-        Hello, World!
-      </h1>
 
-      <Button>
-        Hello i am a Shadcd btn
-      </Button>
-    </div>
+    </ProductsProvider>
+    </>
   )
 }
 
