@@ -1,6 +1,7 @@
 import React from 'react'
 import { ProductsProvider } from './context/useProductsContext'
 import Nav from './components/Nav'
+import Home from './pages/Home'
 
 
 const App = () => {
@@ -8,7 +9,7 @@ const App = () => {
     <>
       <ProductsProvider>
         <Nav />
-        test
+        <Home/>
         {/* Your application components */}
 
 
