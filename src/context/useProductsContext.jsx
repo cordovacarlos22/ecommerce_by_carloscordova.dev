@@ -6,25 +6,28 @@ const ProductsContext = createContext();
 //! creates Products provider 
 
 const ProductsProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
-  const [loadings, setLoadings] = useState(true);
 
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('') // product to be searched
+  console.log("db variable", import.meta.env.VITE_DB_URL)
   // fetch products data from an API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         //? toastify loading logic pending 
 
-        let responce = await fetch('https://json-server-by-carloscordova-dev.onrender.com/items');
-        let responseJson = await responce.json();
+        let url = import.meta.env.VITE_DB_URL
+        let response = await fetch(`${url}/items`);
+        let responseJson = await response.json();
         setProducts(responseJson);
-        setLoadings(false);
+        setLoading(false);
 
       } catch (error) {
         //?  toastify error pending 
 
         console.error("Error fetching products: ", error);
-        setLoadings(false);
+        setLoading(false);
       }
     }
     fetchProducts()
@@ -34,8 +37,10 @@ const ProductsProvider = ({ children }) => {
   let data = {
     products,
     setProducts,
-    loadings,
-    setLoadings
+    loading,
+    setLoading,
+    searchTerm,
+    setSearchTerm,
   }
   return (
     <ProductsContext.Provider value={data}>
@@ -43,4 +48,4 @@ const ProductsProvider = ({ children }) => {
     </ProductsContext.Provider>
   );
 }
-export { ProductsContext, ProductsProvider }
+export { ProductsContext, ProductsProvider, }
