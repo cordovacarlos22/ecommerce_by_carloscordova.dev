@@ -2,6 +2,7 @@ import { ProductsContext } from '@/context/useProductsContext'
 import React, { useContext } from 'react'
 import Card from '@/components/Card';
 import SkeletonCard from '@/components/SkeletonCard';
+import LoadingSpinner from '@/components/LoadingSpinner';
 const Home = () => {
   const productsArray = useContext(ProductsContext);
 
@@ -16,10 +17,13 @@ const Home = () => {
       {
         productsArray.loading ?
           (
-            <article className='flex flex-wrap justify-center items-center w-full gap-2'>
-              {skeletons.map((_, index) => (
-                <SkeletonCard key={index} />
-              ))}
+            <article className='relative w-screen'>
+              <LoadingSpinner />
+              <article className='flex flex-wrap justify-center items-center w-full gap-2'>
+                {skeletons.map((_, index) => (
+                  <SkeletonCard key={index} />
+                ))}
+              </article>
             </article>
           ) :
           (<>
