@@ -7,6 +7,7 @@ const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
 
+  
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('') // product to be searched
