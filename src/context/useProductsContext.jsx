@@ -7,11 +7,11 @@ const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
 
-  
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('') // product to be searched
-  console.log("db variable", import.meta.env.VITE_DB_URL)
+  
   // fetch products data from an API
   useEffect(() => {
     const fetchProducts = async () => {
