@@ -1,24 +1,90 @@
-import { ProductsContext } from '@/context/useProductsContext'
-import React, { useContext } from 'react'
-
+import { ProductsContext } from '@/context/useProductsContext';
+import React, { useContext, useState } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
+import { navLinks } from '/src/navLinks.js';
+import logo from './../assets/logo.svg';
+import hamburgerMenu from './../assets/menu.svg';
+import closeMenu from './../assets/close.svg';
+import searchMagnifier from './../assets/search-magnifier.svg';
+import ShoppingCart from './../assets/shopping-cart.svg';
 const Nav = () => {
   const itemsContext = useContext(ProductsContext);
-  
-  return (
-    <div>
-        <h1>navigation</h1>
-      
-        <input
-          onChange={(e) => itemsContext.setSearchTerm(e.target.value)}
-          type="search"
-          value={itemsContext.searchTerm}
-          placeholder='search Item'
-        />
-      <h1>
-        {itemsContext.searchTerm}
-       </h1>
-    </div>
-  )
-}
+  const [menuOpen, setMenuOpen] = useState(false);
 
-export default Nav
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  return (
+    <>
+      {/* desktop menu */}
+      <nav className='flex flex-wrap relative min-h-[72px] bg-blue-700 items-center p-4'>
+        <section className='flex items-center justify-center gap-2'>
+          <NavLink to='/'>
+            <img src={logo} alt="logo" />
+          </NavLink>
+          <section>
+            <button
+              className="flex items-center space-x-2"
+              onClick={toggleMenu}
+            >
+              <img className="w-6" src={menuOpen ? closeMenu : hamburgerMenu} alt="menu icon" />
+              <p className='text-white'>{menuOpen ? 'Close' : 'Menu'}</p>
+            </button>
+          </section>
+        </section>
+
+        <ul
+          className={`absolute z-30 p-4 transform transition-transform duration-300 ease-in-out bg-white text-black shadow-md rounded-md left-0  top-full w-full ${menuOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0 pointer-events-none'
+            }`}
+        >
+          {navLinks.map(link => (
+            <li key={link.path} className="border-b">
+              <NavLink
+                to={link.path}
+                className={({ isActive }) =>
+                  isActive ? 'text-blue-500' : 'text-gray-800'
+                }
+                onClick={toggleMenu} // Close the menu when a link is clicked
+              >
+                {link.name}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+
+        <form className="m-auto flex justify-center items-center  ">
+          <input
+            className="  p-2 rounded text-black w-48 m-2 lg:w-96 pl-10"
+            onChange={(e) => itemsContext.setSearchTerm(e.target.value)}
+            type="search"
+            value={itemsContext.searchTerm}
+            placeholder='How can I help you?'
+          />
+
+        </form>
+        <section className='flex items-center  justify-end w-1/2  gap-4'>
+
+          <section className='relative'>
+            <NavLink to="checkout">
+              <img src={ShoppingCart} alt='shopping cart' />
+              <div className='absolute text-center top-0 right-0  rounded-full bg-yellow-400 min-w-[28px] min-h-[28px]'>
+                <span className=' text-center p-2 '> 100  </span>
+              </div>
+            </NavLink>
+          </section>
+          <section className='flex items-center justify-center gap-2'>
+            <button className='flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-500'>
+              <NavLink to="/login">
+                Sign In
+              </NavLink>
+            </button>
+          </section>
+        </section>
+      </nav>
+      <Outlet />
+    </>
+  );
+};
+
+export default Nav;
