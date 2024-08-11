@@ -9,7 +9,7 @@ const Home = () => {
   const filterProducts = productsArray.products.filter((product) => {
     return product.product_name.toLowerCase().includes(productsArray.searchTerm.toLowerCase());
   });
-  // Dynamically create an array with 10 items (or any number you want)
+  // Dynamically create an array with 52 items (or any number you want)
   const skeletons = Array.from({ length: 52 });
 
   return (
@@ -37,8 +37,9 @@ const Home = () => {
                       <article className='flex flex-wrap justify-center items-center   gap-2' key={item.product_name}>
                         <Card
                           key={item.product_name}
+                          id={item.id}
                           url={item.url}
-                          image={item.image}
+                          image={item.image[0]}
                           product_name={item.product_name}
                         />
                       </article>
