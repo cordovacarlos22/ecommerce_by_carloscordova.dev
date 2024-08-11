@@ -18,18 +18,23 @@ const Nav = () => {
   return (
     <>
       {/* desktop menu */}
-      <nav className='flex flex-wrap relative min-h-[72px] bg-blue-700 items-center p-4'>
-        <section className='flex items-center justify-center gap-2'>
-          <NavLink to='/'>
-            <img src={logo} alt="logo" />
-          </NavLink>
-          <section>
+      <nav className='flex flex-wrap justify-around relative min-h-[72px] bg-blue-700 items-center p-4'>
+        <section className='flex  items-center justify-center gap-2'>
+          <aside>
+            <NavLink to='/'>
+              <img
+                width={38}
+                src={logo} alt="logo" />
+            </NavLink>
+          </aside>
+          <section  
+          >
             <button
               className="flex items-center space-x-2"
               onClick={toggleMenu}
             >
               <img className="w-6" src={menuOpen ? closeMenu : hamburgerMenu} alt="menu icon" />
-              <p className='text-white'>{menuOpen ? 'Close' : 'Menu'}</p>
+              <p className=' rounded-sm  px-4 py-2 text-sm font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-500 '>{menuOpen ? 'Close' : 'Menu'}</p>
             </button>
           </section>
         </section>
@@ -53,28 +58,36 @@ const Nav = () => {
           ))}
         </ul>
 
-        <form className="m-auto flex justify-center items-center  ">
+        <form className=" flex justify-center  items-center ">
           <input
-            className="  p-2 rounded text-black w-48 m-2 lg:w-96 pl-10"
+            className="  flex  py-4 rounded-l-sm text-black w-48 my-2 lg:w-96 pl-10"
             onChange={(e) => itemsContext.setSearchTerm(e.target.value)}
             type="search"
             value={itemsContext.searchTerm}
             placeholder='How can I help you?'
           />
-
+          <div
+            className='flex bg-white p-4 my-2 rounded-r-sm text-black  '
+          >
+            <img
+              width={30}
+              src={searchMagnifier} alt="search magnifier glass " />
+          </div>
         </form>
-        <section className='flex items-center  justify-end w-1/2  gap-4'>
+        <section className='flex flex-col md:flex-row items-center  justify-end w-1/2  gap-4'>
 
-          <section className='relative'>
+          <section className='relative flex '>
             <NavLink to="checkout">
-              <img src={ShoppingCart} alt='shopping cart' />
+              <img
+                
+                src={ShoppingCart} alt='shopping cart' />
               <div className='absolute text-center top-0 right-0  rounded-full bg-yellow-400 min-w-[28px] min-h-[28px]'>
                 <span className=' text-center p-2 '> 100  </span>
               </div>
             </NavLink>
           </section>
-          <section className='flex items-center justify-center gap-2'>
-            <button className='flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-500'>
+          <section className='flex  items-center justify-center gap-2'>
+            <button className='flex rounded-sm items-center gap-2 px-4 py-2 text-sm font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-500'>
               <NavLink to="/login">
                 Sign In
               </NavLink>
