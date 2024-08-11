@@ -11,7 +11,6 @@ const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('') // product to be searched
-  
   // fetch products data from an API
   useEffect(() => {
     const fetchProducts = async () => {
