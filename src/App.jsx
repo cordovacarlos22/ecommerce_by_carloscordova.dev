@@ -1,5 +1,6 @@
 import React from 'react'
 import { ProductsProvider } from './context/useProductsContext'
+import { UserProvider } from './context/UserContext'
 import Nav from './components/Nav'
 import Home from './pages/Home'
 import OffertSpan from './components/OffertSpan'
@@ -30,10 +31,13 @@ const App = () => {
   ])
   return (
     <>
-      <ProductsProvider>
-        <OffertSpan />
-        <RouterProvider router={router} />
-      </ProductsProvider>
+      <UserProvider>
+        <ProductsProvider>
+          <OffertSpan />
+          <RouterProvider router={router} />
+        </ProductsProvider>
+      </UserProvider>
+
     </>
   )
 }
