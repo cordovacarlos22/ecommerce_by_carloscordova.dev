@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import logo from './../assets/logo.svg'
 import { userContext } from '@/context/UserContext';
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form";
@@ -9,14 +8,14 @@ import * as yup from "yup";
 
 const schema = yup.object({
   email: yup.string().required(),
-  password: yup.string().required(),
+  password: yup.string().min(8).required(),
 }).required();
 
 
 const Login = () => {
 
-  const userContex = useContext(userContext);
-  const { setToken, setUser } = userContex;
+  const UserContext = useContext(userContext);
+  const { setToken, setUser } = UserContext;
 
   const { register, handleSubmit, formState: { errors } } = useForm(
     {
@@ -25,7 +24,8 @@ const Login = () => {
   );
   const onSubmit = data => {
     // TODO: Validate and send login request to server
-    console.log('Form submitted:', data);
+    const { email, password } = data
+    console.log('Form submitted:', email, password);
     // Mock login success
     setToken('mock_token');
     setUser(data);
@@ -36,15 +36,15 @@ const Login = () => {
     <>
 
       <div className="flex w-full  min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm bg-blue-500 p-4 rounded-md">
-          <img
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm  p-4 rounded-md">
+          {/* <img
             alt="ecommerce logo"
             src={logo}
             className="mx-auto h-10 w-auto"
-          />
-          <h2 className="mt-10 text-center  underline-offset-8 underline text-2xl font-bold leading-9 tracking-tight text-white">
+          /> */}
+          <h1 className="mt-10 text-center text-black font-extrabold  underline-offset-8 underline text-2xl  leading-9 tracking-tight ">
             Sign in to your account
-          </h2>
+          </h1>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -63,7 +63,7 @@ const Login = () => {
                   className="block w-full text-center rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 {errors.email && <div class="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
-                  <p>{ errors.email.message}</p>
+                  <p>{errors.email?.message}</p>
                 </div>}
               </div>
             </div>
@@ -90,7 +90,7 @@ const Login = () => {
                   className="block text-center w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
                 {errors.password && <div class="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
-                  <p>{ errors.password?.message}</p>
+                  <p>{errors.password?.message}</p>
                 </div>}
               </div>
             </div>
