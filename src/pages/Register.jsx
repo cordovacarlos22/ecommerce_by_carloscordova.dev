@@ -31,6 +31,7 @@ const Register = () => {
     }
   );
 
+
   const onSubmit = data => {
     // TODO: Validate and send register request to server
     console.log('Form submitted:', data);
