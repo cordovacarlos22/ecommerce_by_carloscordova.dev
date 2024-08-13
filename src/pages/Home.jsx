@@ -36,7 +36,7 @@ const Home = () => {
 
                       <article className='flex flex-wrap justify-center items-center   gap-2' key={item.product_name}>
                         <Card
-                          key={item.product_name}
+                          key={item.id}
                           id={item.id}
                           url={item.url}
                           image={item.image[0]}
