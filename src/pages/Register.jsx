@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { signup } from '@/services/user.services';
 
 // todo: this how my schema should be structured 
 // {
@@ -33,6 +34,7 @@ const Register = () => {
   const onSubmit = data => {
     // TODO: Validate and send register request to server
     console.log('Form submitted:', data);
+    signup(data);
   };
 
 

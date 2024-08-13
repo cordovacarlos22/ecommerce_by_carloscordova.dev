@@ -14,7 +14,8 @@ const Nav = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-//  todo : need to fix search magnifier glass on input 
+  //  todo : need to fix search magnifier glass on input 
+  
   return (
     <>
       {/* desktop menu */}
