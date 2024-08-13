@@ -105,8 +105,11 @@ const Register = () => {
                   </label>
                   <select
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    {...register("gender")}>
-                    <option disabled value="">Select gender</option>
+                    {...register("gender", { required: true })}
+                    defaultValue=""
+
+                  >
+                    <option disabled value=''>Select gender</option>
                     <option value="M">male</option>
                     <option value="F">female</option>
                   </select>
@@ -172,8 +175,10 @@ const Register = () => {
                   </label>
                   <select
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    {...register("role")}>
-                    <option disabled >Select role</option>
+                    {...register("role", { required: true })}
+                    defaultValue=""
+                  >
+                    <option disabled  value=''>Select role</option>
                     <option value="COSTUMER">costumer</option>
                     <option value="ADMIN">admin</option>
                   </select>
@@ -191,8 +196,14 @@ const Register = () => {
                       aria-describedby="terms"
                       type="checkbox"
                       className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                      required=""
+                      {...register("terms", { required: true })}
                     />
+                    {
+                      errors.role &&
+                      <div class="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
+                        <p>{errors.terms.message}</p>
+                      </div>
+                    }
                   </div>
                   <div className="ml-3 text-sm">
                     <label
