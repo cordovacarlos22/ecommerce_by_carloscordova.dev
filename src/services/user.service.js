@@ -4,13 +4,12 @@ let url = import.meta.env.VITE_DB_URL;
 
 export const accountInfo = async (token) => {
   try {
-
-    const config = {
+    
+    const response = await axios.get(`${url}/users/me`, {
       headers: {
         Authorization: `Bearer ${token}`, // Include the token in the Authorization header
       },
-    }
-    const response = await axios.get(`${url}/users/me`, config);
+    });
     // console.log("API response account info", response);
     return response.data; // Return the data from the response
   } catch (error) {
