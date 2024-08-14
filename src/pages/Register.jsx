@@ -4,17 +4,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { signup } from '@/services/auth.service';
-
-// todo: this how my schema should be structured 
-// {
-//   "first_name": "Dr.",
-//     "last_name": "Strange",
-//       "gender": "M",
-//         "email": "drstrange@marvel.com",
-//           "password": "multiverso",
-//             "role": "CUSTOMER"
-            
-// }
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const schema = yup.object({
   first_name: yup.string().required(),
   last_name: yup.string().required(),
@@ -35,15 +26,13 @@ const Register = () => {
 
 
   const onSubmit = data => {
-    // TODO: Validate and send register request to server
-    console.log('Form submitted:', data);
-    signup(data);
+    console.log('onSubmit',data)
+     signup(data);
   };
 
 
   return (
     <>
-
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -199,6 +188,7 @@ const Register = () => {
                       type="checkbox"
                       className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                       {...register("terms", { required: true })}
+                      
                     />
 
                   </div>
@@ -243,6 +233,7 @@ const Register = () => {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </section>
 
     </>
