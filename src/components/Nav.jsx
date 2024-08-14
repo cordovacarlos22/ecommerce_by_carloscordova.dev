@@ -1,4 +1,5 @@
 import { ProductsContext } from '@/context/useProductsContext';
+
 import React, { useContext, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { navLinks } from '/src/navLinks.js';
@@ -7,11 +8,15 @@ import hamburgerMenu from './../assets/menu.svg';
 import closeMenu from './../assets/close.svg';
 import searchMagnifier from './../assets/search-magnifier.svg';
 import ShoppingCart from './../assets/shopping-cart.svg';
+import { userContext } from '@/context/UserContext';
 const Nav = () => {
   const itemsContext = useContext(ProductsContext);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [login, setLogin] = useState(false);
+  const UserContext = useContext(userContext);
 
+  const { searchTerm, setSearchTerm } = itemsContext
+  const { login } = UserContext //* destructure user context
+  console.log("login status", UserContext.login);
 
   const handleLogout = (token) => {
 
@@ -68,9 +73,9 @@ const Nav = () => {
         <form className=" flex justify-center  items-center ">
           <input
             className="  flex  py-4 rounded-l-sm text-black w-48 my-2 lg:w-96 pl-10"
-            onChange={(e) => itemsContext.setSearchTerm(e.target.value)}
+            onChange={(e) => setSearchTerm(e.target.value)}
             type="search"
-            value={itemsContext.searchTerm}
+            value={searchTerm}
             placeholder='How can I help you?'
           />
           <div
@@ -99,7 +104,9 @@ const Nav = () => {
                 <button
                   onClick={handleLogout}
                   className='flex rounded-sm items-center gap-2 px-4 py-2 text-sm font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-500'
-                >Logout</button>
+                >
+                  Logout
+                </button>
               </>) : (<>
                 <NavLink
                   to="/login"
