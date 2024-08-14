@@ -62,7 +62,7 @@ const Login = () => {
                   autoComplete="email"
                   className="block w-full text-center rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                {errors.email && <div class="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
+                {errors.email && <div className="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
                   <p>{errors.email?.message}</p>
                 </div>}
               </div>
@@ -89,7 +89,7 @@ const Login = () => {
                   placeholder='Enter your password'
                   className="block text-center w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                {errors.password && <div class="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
+                {errors.password && <div className="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
                   <p>{errors.password?.message}</p>
                 </div>}
               </div>
