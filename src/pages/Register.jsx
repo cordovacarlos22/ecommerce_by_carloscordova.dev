@@ -3,16 +3,17 @@ import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { signup } from '@/services/user.services';
+import { signup } from '@/services/auth.service';
 
 // todo: this how my schema should be structured 
 // {
-//   "first_name": "carlos",
-//     "last_name": "cordova",
+//   "first_name": "Dr.",
+//     "last_name": "Strange",
 //       "gender": "M",
-//         "email": "carlosadmin@marvel.com",
-//           "password": "password",
-//             "role": "ADMIN"
+//         "email": "drstrange@marvel.com",
+//           "password": "multiverso",
+//             "role": "CUSTOMER"
+            
 // }
 const schema = yup.object({
   first_name: yup.string().required(),
