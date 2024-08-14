@@ -6,6 +6,7 @@ const userContext = createContext();
 const UserProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
+  const [login, setLogin] = useState(false);
 
   useEffect(() => {
     console.log("userData", user)
@@ -18,6 +19,8 @@ const UserProvider = ({ children }) => {
     setToken,
     user,
     setUser,
+    login,
+    setLogin,
   }
   return (
     <userContext.Provider value={data}>
