@@ -88,11 +88,12 @@ const Nav = () => {
             </NavLink>
           </section>
           <section className='flex  items-center justify-center gap-2'>
-            <button className='flex rounded-sm items-center gap-2 px-4 py-2 text-sm font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-500'>
-              <NavLink to="/login">
-                Sign In
-              </NavLink>
-            </button>
+            <NavLink
+              to="/login"
+              className='flex rounded-sm items-center gap-2 px-4 py-2 text-sm font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-500'
+            >
+              Sign In
+            </NavLink>
           </section>
         </section>
       </nav>
