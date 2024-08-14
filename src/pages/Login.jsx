@@ -7,6 +7,8 @@ import * as yup from "yup";
 import { login } from '@/services/auth.service';
 import { accountInfo } from '@/services/user.service';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const schema = yup.object({
   email: yup.string().required(),
   password: yup.string().min(8).required(),
@@ -15,7 +17,7 @@ const schema = yup.object({
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setupSession, setUser, setLogin, token } = useContext(userContext);
+  const { setupSession, setUser } = useContext(userContext);
 
   const { register, handleSubmit, formState: { errors } } = useForm(
     {
@@ -24,19 +26,27 @@ const Login = () => {
   );
   const onSubmit = async (data) => {
     // TODO: Validate and send login request to server
-    const { email, password } = data
-    console.log('Form submitted:', email, password);
-
     try {
 
       // ! handles login request
       const response = await login(data);
       if (response.status === 200) {
         setupSession(response.data.token)
-        console.log('Form submitted:', response)
         // todo : should add a toasify alert if user logged in
-        alert('Logged in successfully')
-        navigate('/')
+        toast.success(' login succesfull !', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+
+        setTimeout(() => {
+          navigate('/')
+        }, 2000);
         //! handles user request after login
         const user = await accountInfo(response.data.token);
         setUser(user)
@@ -44,6 +54,17 @@ const Login = () => {
     } catch (error) {
       console.log(error)
       // TODO: Add toastify error notification
+      toast.error('please verify credentials', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
+
     }
 
   };
@@ -54,11 +75,6 @@ const Login = () => {
 
       <div className="flex w-full  min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm  p-4 rounded-md">
-          {/* <img
-            alt="ecommerce logo"
-            src={logo}
-            className="mx-auto h-10 w-auto"
-          /> */}
           <h1 className="mt-10 text-center text-black font-extrabold  underline-offset-8 underline text-2xl  leading-9 tracking-tight ">
             Sign in to your account
           </h1>
@@ -129,6 +145,7 @@ const Login = () => {
             </Link>
           </p>
         </div>
+        <ToastContainer/>
       </div>
     </>
   )
