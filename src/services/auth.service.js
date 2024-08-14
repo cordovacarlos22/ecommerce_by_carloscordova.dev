@@ -1,8 +1,21 @@
+
 import axios from "axios";
 
+let url = import.meta.env.VITE_DB_URL
+
+export const login = async (data) => {
+  // Your login logic goes here
+  try {
+    const response = await axios.post(`${url}/login`, data);   
+      return response
+  } catch (error) {
+    console.error(error);
+    //todo :   toastify error message 
+  }
+}
 
 export const signup = async (data) => {
-  let url = import.meta.env.VITE_DB_URL
+  
   // Your signup logic goes here
   try {
     const response = await axios.post(`${url}/register`, data);
