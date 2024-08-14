@@ -20,7 +20,8 @@ const schema = yup.object({
   gender: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().min(8).required(),
-  role: yup.string().required()
+  role: yup.string().required(),
+  terms: yup.bool().oneOf([true], 'You must accept the terms and conditions').required()
 }).required();
 
 
@@ -178,7 +179,7 @@ const Register = () => {
                     {...register("role", { required: true })}
                     defaultValue=""
                   >
-                    <option disabled  value=''>Select role</option>
+                    <option disabled value=''>Select role</option>
                     <option value="COSTUMER">costumer</option>
                     <option value="ADMIN">admin</option>
                   </select>
@@ -198,14 +199,9 @@ const Register = () => {
                       className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                       {...register("terms", { required: true })}
                     />
-                    {
-                      errors.role &&
-                      <div class="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
-                        <p>{errors.terms.message}</p>
-                      </div>
-                    }
+
                   </div>
-                  <div className="ml-3 text-sm">
+                  <div className="ml-3 text-sm  ">
                     <label
                       htmlFor="terms"
                       className="font-light text-gray-500 dark:text-gray-300"
@@ -219,9 +215,16 @@ const Register = () => {
                       </Link>
                     </label>
                   </div>
+
                 </div>
+                {
+                  errors.terms &&
+                  <div className="border  border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
+                    <p>{errors.terms.message}</p>
+                  </div>
+                }
                 <button
-                  type="submit"
+
                   className="w-full text-white bg-blue-600 my-2 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
                   Create an account
