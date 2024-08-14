@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react'
 import { userContext } from '@/context/UserContext';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-
+import { login } from '@/services/auth.service';
+import { accountInfo } from '@/services/user.service';
 
 const schema = yup.object({
   email: yup.string().required(),
@@ -13,22 +14,38 @@ const schema = yup.object({
 
 
 const Login = () => {
-
-  const UserContext = useContext(userContext);
-  const { setToken, setUser } = UserContext;
+  const navigate = useNavigate();
+  const { setupSession, setUser, setLogin, token } = useContext(userContext);
 
   const { register, handleSubmit, formState: { errors } } = useForm(
     {
       resolver: yupResolver(schema)
     }
   );
-  const onSubmit = data => {
+  const onSubmit = async (data) => {
     // TODO: Validate and send login request to server
     const { email, password } = data
     console.log('Form submitted:', email, password);
-    // Mock login success
-    setToken('mock_token');
-    setUser(data);
+
+    try {
+
+      // ! handles login request
+      const response = await login(data);
+      if (response.status === 200) {
+        setupSession(response.data.token)
+        console.log('Form submitted:', response)
+        // todo : should add a toasify alert if user logged in
+        alert('Logged in successfully')
+        navigate('/')
+        //! handles user request after login
+        const user = await accountInfo(token);
+        setUser(user)
+      }
+    } catch (error) {
+      console.log(error)
+      // TODO: Add toastify error notification
+    }
+
   };
 
 
