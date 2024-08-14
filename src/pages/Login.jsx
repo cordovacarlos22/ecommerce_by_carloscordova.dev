@@ -38,7 +38,7 @@ const Login = () => {
         alert('Logged in successfully')
         navigate('/')
         //! handles user request after login
-        const user = await accountInfo(token);
+        const user = await accountInfo(response.data.token);
         setUser(user)
       }
     } catch (error) {
