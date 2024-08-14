@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 //! create a new context 
 const userContext = createContext();
@@ -9,9 +10,28 @@ const UserProvider = ({ children }) => {
   const [login, setLogin] = useState(false);
 
   useEffect(() => {
-    console.log("userData", user)
-    console.log("token", token)
-  }, [user, token]);
+    let storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
+      setLogin(true);
+    } else {
+      setLogin(false);
+      setUser(null);
+      setToken(null);
+    }
+  }, [token]);
+
+
+  const setupSession = (token) => {
+    localStorage.setItem("token", token)
+    setToken(token)
+  }
+
+  const deleteSession = () => {
+    localStorage.removeItem("token")
+    setToken(null)
+
+  }
 
 
   let data = {
@@ -21,6 +41,8 @@ const UserProvider = ({ children }) => {
     setUser,
     login,
     setLogin,
+    setupSession,
+    deleteSession,
   }
   return (
     <userContext.Provider value={data}>
