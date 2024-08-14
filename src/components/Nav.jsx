@@ -10,12 +10,18 @@ import ShoppingCart from './../assets/shopping-cart.svg';
 const Nav = () => {
   const itemsContext = useContext(ProductsContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [login, setLogin] = useState(false);
 
+
+  const handleLogout = (token) => {
+
+    // todo : needs login to handle logout
+  }
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
   //  todo : need to fix search magnifier glass on input 
-  
+
   return (
     <>
       {/* desktop menu */}
@@ -28,7 +34,7 @@ const Nav = () => {
                 src={logo} alt="logo" />
             </NavLink>
           </aside>
-          <section  
+          <section
           >
             <button
               className="flex items-center space-x-2"
@@ -80,7 +86,7 @@ const Nav = () => {
           <section className='relative flex '>
             <NavLink to="checkout">
               <img
-                
+
                 src={ShoppingCart} alt='shopping cart' />
               <div className='absolute text-center top-0 right-0  rounded-full bg-yellow-400 min-w-[28px] min-h-[28px]'>
                 <span className=' text-center p-2 '> 100  </span>
@@ -88,12 +94,20 @@ const Nav = () => {
             </NavLink>
           </section>
           <section className='flex  items-center justify-center gap-2'>
-            <NavLink
-              to="/login"
-              className='flex rounded-sm items-center gap-2 px-4 py-2 text-sm font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-500'
-            >
-              Sign In
-            </NavLink>
+            {login ? (
+              <>
+                <button
+                  onClick={handleLogout}
+                  className='flex rounded-sm items-center gap-2 px-4 py-2 text-sm font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-500'
+                >Logout</button>
+              </>) : (<>
+                <NavLink
+                  to="/login"
+                  className='flex rounded-sm items-center gap-2 px-4 py-2 text-sm font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-500'
+                >
+                  Sign In
+                </NavLink></>)}
+
           </section>
         </section>
       </nav>
