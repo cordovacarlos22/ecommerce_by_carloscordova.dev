@@ -15,13 +15,14 @@ const Nav = () => {
   const UserContext = useContext(userContext);
 
   const { searchTerm, setSearchTerm } = itemsContext
-  const { login } = UserContext //* destructure user context
+  const { login, deleteSession } = UserContext //* destructure user context
   console.log("login status", UserContext.login);
 
-  const handleLogout = (token) => {
-
-    // todo : needs login to handle logout
+  const handleLogOut = () => {
+    deleteSession()
+    alert("you have been logged out")
   }
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -101,12 +102,13 @@ const Nav = () => {
           <section className='flex  items-center justify-center gap-2'>
             {login ? (
               <>
-                <button
-                  onClick={handleLogout}
+                <NavLink
+                  to="/"
+                  onClick={handleLogOut}
                   className='flex rounded-sm items-center gap-2 px-4 py-2 text-sm font-semibold text-white border-2 border-white hover:bg-white hover:text-blue-500'
                 >
                   Logout
-                </button>
+                </NavLink>
               </>) : (<>
                 <NavLink
                   to="/login"
