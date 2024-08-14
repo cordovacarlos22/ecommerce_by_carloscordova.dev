@@ -15,8 +15,7 @@ const Nav = () => {
   const UserContext = useContext(userContext);
 
   const { searchTerm, setSearchTerm } = itemsContext
-  const { login, deleteSession } = UserContext //* destructure user context
-  console.log("login status", UserContext.login);
+  const { login, deleteSession, user } = UserContext //* destructure user context
 
   const handleLogOut = () => {
     deleteSession()
@@ -77,7 +76,8 @@ const Nav = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             type="search"
             value={searchTerm}
-            placeholder='How can I help you?'
+            placeholder={user ? `${user.first_name}, how can I help?` : 'How can I help?'}
+
           />
           <div
             className='flex bg-white p-4 my-2 rounded-r-sm text-black  '
