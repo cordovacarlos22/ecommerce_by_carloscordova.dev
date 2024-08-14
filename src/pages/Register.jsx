@@ -11,7 +11,7 @@ import { signup } from '@/services/user.services';
 //     "last_name": "cordova",
 //       "gender": "M",
 //         "email": "carlosadmin@marvel.com",
-//           "password": "admin",
+//           "password": "password",
 //             "role": "ADMIN"
 // }
 const schema = yup.object({
@@ -69,7 +69,7 @@ const Register = () => {
                   />
                   {
                     errors.first_name &&
-                    <div class="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
+                    <div className="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
                       <p>{errors.first_name.message}</p>
                     </div>
                   }
@@ -92,7 +92,7 @@ const Register = () => {
                   />
                   {
                     errors.last_name &&
-                    <div class="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
+                    <div className="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
                       <p>{errors.last_name.message}</p>
                     </div>
                   }
@@ -116,7 +116,7 @@ const Register = () => {
                   </select>
                   {
                     errors.gender &&
-                    <div class="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
+                    <div className="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
                       <p>{errors.gender.message}</p>
                     </div>
                   }
@@ -139,7 +139,7 @@ const Register = () => {
                   />
                   {
                     errors.email &&
-                    <div class="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
+                    <div className="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
                       <p>{errors.email.message}</p>
                     </div>
                   }
@@ -162,7 +162,7 @@ const Register = () => {
                   />
                   {
                     errors.password &&
-                    <div class="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
+                    <div className="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
                       <p>{errors.password.message}</p>
                     </div>
                   }
@@ -185,7 +185,7 @@ const Register = () => {
                   </select>
                   {
                     errors.role &&
-                    <div class="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
+                    <div className="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
                       <p>{errors.role.message}</p>
                     </div>
                   }
