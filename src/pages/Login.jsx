@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { login } from '@/services/auth.service';
+import { loginUserService } from '@/services/auth.service';
 import { accountInfo } from '@/services/user.service';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,8 +16,9 @@ const schema = yup.object({
 
 
 const Login = () => {
+
   const navigate = useNavigate();
-  const { setupSession, setUser } = useContext(userContext);
+  const { setupSession, setUser, setRole } = useContext(userContext);
 
   const { register, handleSubmit, formState: { errors } } = useForm(
     {
@@ -25,11 +26,20 @@ const Login = () => {
     }
   );
   const onSubmit = async (data) => {
-    // TODO: Validate and send login request to server
     try {
+      toast.info(' waiting for server !', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
 
+      let response = await loginUserService(data)
       // ! handles login request
-      const response = await login(data);
       if (response.status === 200) {
         setupSession(response.data.token)
         // todo : should add a toasify alert if user logged in
@@ -50,11 +60,11 @@ const Login = () => {
         //! handles user request after login
         const user = await accountInfo(response.data.token);
         setUser(user)
+        localStorage.setItem("role", user.role)
+        setRole(user.role)
       }
     } catch (error) {
-      console.log(error)
-      // TODO: Add toastify error notification
-      toast.error('please verify credentials', {
+      toast.error(`please verify credentials ${error.message}`, {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -64,9 +74,7 @@ const Login = () => {
         progress: undefined,
         theme: "light"
       });
-
     }
-
   };
 
 
@@ -145,7 +153,7 @@ const Login = () => {
             </Link>
           </p>
         </div>
-        <ToastContainer/>
+        <ToastContainer />
       </div>
     </>
   )
