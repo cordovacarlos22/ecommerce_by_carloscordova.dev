@@ -11,27 +11,43 @@ const UserProvider = ({ children }) => {
   const [role, setRole] = useState(null)
   useEffect(() => {
     let storedToken = localStorage.getItem("token");
+    let storedUser = localStorage.getItem("user");
+    let storedRole = localStorage.getItem("role");
     if (storedToken) {
       setToken(storedToken);
       setLogin(true);
-    } else {
-      setLogin(false);
-      setUser(null);
-      setToken(null);
-      setRole(null);
+    }
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+     
+    }
+    if (storedRole) {
+      setRole(storedRole);
     }
   }, [token]);
 
 
-  const setupSession = (token) => {
-    localStorage.setItem("token", token)
-    setToken(token)
-  }
+  const setupSession = (token, userData) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("role", userData.role);
+
+    setToken(token);
+    setUser(userData);
+    console.log("user data", userData)
+    setRole(userData.role);
+    setLogin(true);
+  };
 
   const deleteSession = () => {
     localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    localStorage.removeItem("role")
     setToken(null)
-
+    setLogin(false);
+    setUser(null);
+    setToken(null);
+    setRole(null);
   }
 
 
