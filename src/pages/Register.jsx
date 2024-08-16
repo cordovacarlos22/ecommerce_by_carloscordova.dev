@@ -1,11 +1,16 @@
-import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import { Link, useNavigate,  } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { signup } from '@/services/auth.service';
-import { ToastContainer } from 'react-toastify';
+
+//? toastify 
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { registerUserService } from '@/services/auth.service';
+
+
 const schema = yup.object({
   first_name: yup.string().required(),
   last_name: yup.string().required(),
@@ -23,18 +28,75 @@ const Register = () => {
       resolver: yupResolver(schema)
     }
   );
+  const navigate = useNavigate()
 
+  const onSubmit = async (data) => {
+   
+    // Your signup logic goes here
+    try {
+      toast.info(' waiting for server !', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
 
-  const onSubmit = data => {
-    console.log('onSubmit',data)
-     signup(data);
+      let response = await registerUserService(data);
+
+      if (response.status === 201) {
+        // todo : should add a toasify alert if user created 
+        toast.success(' you have registed !', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+        // Navigate to login page
+        setTimeout(() => {
+          setTimeout(() => {
+            navigate('/login')
+            
+          }, 3000)
+          toast.info(' navigating to login !', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light"
+          });
+        },2000)
+      }
+    } catch (error) {
+      //todo :   toastify error message 
+      toast.error(`error  has happened:${error.message}`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
+    }
   };
 
 
   return (
     <>
-      <section className="bg-gray-50 dark:bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <section className="bg-gray-50 dark:bg-gray-900 ">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:min-h-screen lg:py-0 mt-4">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -188,7 +250,7 @@ const Register = () => {
                       type="checkbox"
                       className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                       {...register("terms", { required: true })}
-                      
+
                     />
 
                   </div>
@@ -233,9 +295,8 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <ToastContainer />
       </section>
-
+      <ToastContainer />
     </>
   )
 }
