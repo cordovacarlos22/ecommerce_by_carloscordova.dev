@@ -9,17 +9,30 @@ import closeMenu from './../assets/close.svg';
 import searchMagnifier from './../assets/search-magnifier.svg';
 import ShoppingCart from './../assets/shopping-cart.svg';
 import { userContext } from '@/context/UserContext';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Nav = () => {
   const itemsContext = useContext(ProductsContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const UserContext = useContext(userContext);
 
   const { searchTerm, setSearchTerm } = itemsContext
-  const { login, deleteSession, user } = UserContext //* destructure user context
+  const { login, deleteSession, user,role } = UserContext //* destructure user context
 
   const handleLogOut = () => {
+    toast.success(' you have logout!', {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light"
+    });
     deleteSession()
-    alert("you have been logged out")
+   
   }
 
   const toggleMenu = () => {
@@ -68,6 +81,18 @@ const Nav = () => {
               </NavLink>
             </li>
           ))}
+          {role ?
+           <li className="border-b">
+              <NavLink
+                to='/dashboard'
+                className={({ isActive }) =>
+                  isActive ? 'text-blue-500' : 'text-gray-800'
+                }
+                onClick={toggleMenu} // Close the menu when a link is clicked
+              >
+                DashBoard
+              </NavLink>
+          </li> : ""}
         </ul>
 
         <form className=" flex justify-center  items-center ">
@@ -119,8 +144,10 @@ const Nav = () => {
 
           </section>
         </section>
+        <ToastContainer />
       </nav>
       <Outlet />
+      
     </>
   );
 };
