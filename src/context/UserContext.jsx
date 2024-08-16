@@ -8,7 +8,7 @@ const UserProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
   const [login, setLogin] = useState(false);
-
+  const [role, setRole] = useState(null)
   useEffect(() => {
     let storedToken = localStorage.getItem("token");
     if (storedToken) {
@@ -18,6 +18,7 @@ const UserProvider = ({ children }) => {
       setLogin(false);
       setUser(null);
       setToken(null);
+      setRole(null);
     }
   }, [token]);
 
@@ -43,6 +44,8 @@ const UserProvider = ({ children }) => {
     setLogin,
     setupSession,
     deleteSession,
+    role,
+    setRole
   }
   return (
     <userContext.Provider value={data}>
