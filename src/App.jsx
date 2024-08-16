@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import CheckOut from './pages/CheckOut'
 import ProductDetail from './components/ProductDetail'
+import Dashboard from './pages/Dashboard'
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
         { path: '/register', element: <Register /> },
         { path: '/checkout', element: <CheckOut /> },
         { path: '/product/:id', element: <ProductDetail /> },
+        { path: '/dashboard', element: <Dashboard /> },
       ],
     }
   ])
