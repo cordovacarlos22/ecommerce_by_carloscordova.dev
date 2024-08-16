@@ -39,9 +39,13 @@ const Login = () => {
       });
 
       let response = await loginUserService(data)
+
+
       // ! handles login request
       if (response.status === 200) {
-        setupSession(response.data.token)
+        const user = await accountInfo(response.data.token);
+
+        setupSession(response.data.token, user)
         // todo : should add a toasify alert if user logged in
         toast.success(' login succesfull !', {
           position: "bottom-right",
@@ -58,10 +62,7 @@ const Login = () => {
           navigate('/')
         }, 2000);
         //! handles user request after login
-        const user = await accountInfo(response.data.token);
-        setUser(user)
-        localStorage.setItem("role", user.role)
-        setRole(user.role)
+
       }
     } catch (error) {
       toast.error(`please verify credentials ${error.message}`, {
