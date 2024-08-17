@@ -3,9 +3,12 @@ import { getAllUsers } from '@/services/auth.service'
 import React, { useContext, useEffect, useState } from 'react'
 import LoadingSpinner from './LoadingSpinner'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const GetAllUsers = () => {
 
-  const { token } = useContext(userContext)
+  const { token,role } = useContext(userContext)
   const [apiUser, setApiUser] = useState([])
   const [localLoading, setlocalLoading] = useState(true)
 
@@ -13,14 +16,43 @@ const GetAllUsers = () => {
 
     const getUsers = async () => {
       try {
+        toast.info('Awaiting server response...', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
         let response = await getAllUsers(token)
         setApiUser(response.data)
+        toast.success('Users Found', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
         setTimeout(() => {
           setlocalLoading(false)
         }, 2000);
-        console.log(response)
+       
       } catch (error) {
-        alert(error.message)
+        toast.error(`Error getting all users${error.message}`, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
       }
     }
     getUsers()
@@ -33,7 +65,7 @@ const GetAllUsers = () => {
     <>
 
       {
-        localLoading ? (<>
+        localLoading && role == 'ADMIN' ? (<>
           <LoadingSpinner />
 
         </>) :
@@ -91,12 +123,19 @@ const GetAllUsers = () => {
 
                 </>) :
 
-                {}
                   (<>
-                    <h1>no users in the data base</h1>
+                  <section
+                    className='w-screen min-h-screen m-2 p-2 flex flex-col justify-center items-center'
+                  >
+                    <h1
+                      className='text-lg font-bold animate-pulse '
+                    >You are not authorized to access list all users</h1>
+                    <span>Only Admin's can get all users</span>
+                  </section>
                   </>)}
             </div>)
       }
+      <ToastContainer />
     </>
   )
 }
