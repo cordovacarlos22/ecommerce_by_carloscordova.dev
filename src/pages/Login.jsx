@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { userContext } from '@/context/UserContext';
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
@@ -9,6 +9,7 @@ import { accountInfo } from '@/services/user.service';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 const schema = yup.object({
   email: yup.string().required(),
   password: yup.string().min(8).required(),
@@ -18,7 +19,7 @@ const schema = yup.object({
 const Login = () => {
 
   const navigate = useNavigate();
-  const { setupSession, setUser, setRole } = useContext(userContext);
+  const { setupSession } = useContext(userContext);
 
   const { register, handleSubmit, formState: { errors } } = useForm(
     {
@@ -104,9 +105,10 @@ const Login = () => {
                   autoComplete="email"
                   className="block w-full text-center rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-                {errors.email && <div className="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
-                  <p>{errors.email?.message}</p>
-                </div>}
+                {errors.email &&
+                  <div className="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
+                    <p>{errors.email?.message}</p>
+                  </div>}
               </div>
             </div>
 
