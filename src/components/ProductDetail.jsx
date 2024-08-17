@@ -39,22 +39,26 @@ const ProductDetail = () => {
           <CarouselNext />
         </Carousel>
       </div>
-      <div className="w-full md:w-1/2 flex flex-col justify-center p-6 md:m-6">
+      <div className="w-full md:w-1/2 flex flex-col justify-center p-6 md:m-6 gap-4">
         <span className='text-blue-500'>{product.brand}</span>
-        <h1 className='font-bold'>{product.product_name}</h1>
-        <p className='font-light'>
+        <h1 className='font-bold md:text-2xl'>{product.product_name}</h1>
+        <p className='md:text-3xl font-bold'>
+        ${product.price}
+        </p>
+        <p className='font-light md:text-xl'>
           <span className='font-bold'>sku: </span>{product.sku}
         </p>
-        <p>
-          <span className='font-bold'>Description: </span>{product.description}
+        <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
+        <p
+          className='mb-6 text-gray-500 dark:text-gray-400'
+        >
+          {product.description}
         </p>
-        <p>
-          <span className='font-bold'>Price: </span>${product.price}
-        </p>
+       
 
         {product.isActive ? (
           <ShoppingCart
-            className="text-white flex justify-center items-center bg-yellow-400 font-bold rounded-md md:w-64 h-12 my-2 hover:bg-yellow-200"
+            className="text-white flex justify-center items-center bg-blue-700 font-bold rounded-md md:w-64 h-12 my-2 hover:bg-yellow-200"
             imgWidth="42"
           >
           </ShoppingCart>
