@@ -4,7 +4,7 @@ import ShoppingCart from './ShoppingCart';
 import rightArrowIcon from './../assets/right-arrow.svg'
 const Card = ({ id, image, product_name }) => {
   return (
-    <div key={product_name} className="max-w-sm flex flex-col justify-center p-2 items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div key={product_name} className="max-w-sm flex flex-col justify-center p-2 items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-2">
       <Link to={`product/${id}`}>
         <img className="rounded-t-lg" src={image} alt={product_name} />
       </Link>
