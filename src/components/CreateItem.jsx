@@ -34,7 +34,6 @@ const CreateItem = () => {
   const { role, token } = useContext(userContext);
 
   const handleCreateItem = async (data) => {
-    console.log('Raw data', data.image);
 
     // Ensure the images field is defined and not empty
     const imagesArray = data.image ? data.image.split(',').map(image => image.trim()) : [];
@@ -42,8 +41,6 @@ const CreateItem = () => {
       ...data,
       image: imagesArray, // Replace the images string with the array
     };
-
-    console.log('Final data', finalData);
 
     try {
       toast.info('Awaiting server response...', {
