@@ -15,6 +15,12 @@ export const createItemService = (token, data) => axios.post(`${url}/items`,data
   },
 });
 
+export const getAllUsers = (token) => axios.get(`${url}/users`, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
+
 
 
 
