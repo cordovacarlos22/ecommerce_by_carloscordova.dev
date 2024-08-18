@@ -11,7 +11,8 @@ import Register from './pages/Register'
 import CheckOut from './pages/CheckOut'
 import ProductDetail from './components/ProductDetail'
 import Dashboard from './pages/Dashboard'
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const App = () => {
@@ -41,9 +42,11 @@ const App = () => {
   /* The `return` statement in the `App` component is rendering the following structure: */
   return (
     <>
+      
       <UserProvider>
         <ProductsProvider>
           <OffertSpan />
+          <ToastContainer />
           <RouterProvider router={router} />
         </ProductsProvider>
       </UserProvider>

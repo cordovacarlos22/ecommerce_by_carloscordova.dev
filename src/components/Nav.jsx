@@ -40,6 +40,22 @@ const Nav = () => {
   };
   //  todo : need to fix search magnifier glass on input 
 
+  const filteredNavLinks = navLinks
+    .filter(link => {
+      if (login && (link.path === '/login' || link.path === '/register')) {
+        return false; // Exclude "Login" and "Register" links if the user is logged in
+      }
+      return true; // Include all other links
+    });
+
+  // Conditionally add "Dashboard" link if the user has an ADMIN role
+  if (role === 'ADMIN') {
+    filteredNavLinks.push({
+      name: 'Dashboard',
+      path: '/dashboard',
+    });
+  }
+
   return (
     <>
       {/* desktop menu */}
@@ -68,7 +84,7 @@ const Nav = () => {
           className={`absolute z-30 p-4 transform transition-transform duration-300 ease-in-out bg-white text-black shadow-md rounded-md left-0  top-full w-full ${menuOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0 pointer-events-none'
             }`}
         >
-          {navLinks.map(link => (
+          {filteredNavLinks.map(link => (
             <li key={link.path} className="border-b">
               <NavLink
                 to={link.path}
@@ -81,18 +97,7 @@ const Nav = () => {
               </NavLink>
             </li>
           ))}
-          {role ?
-           <li className="border-b">
-              <NavLink
-                to='/dashboard'
-                className={({ isActive }) =>
-                  isActive ? 'text-blue-500' : 'text-gray-800'
-                }
-                onClick={toggleMenu} // Close the menu when a link is clicked
-              >
-                DashBoard
-              </NavLink>
-          </li> : ""}
+          
         </ul>
 
         <form className=" flex justify-center  items-center ">
@@ -141,10 +146,8 @@ const Nav = () => {
                 >
                   Sign In
                 </NavLink></>)}
-
           </section>
         </section>
-        <ToastContainer />
       </nav>
       <Outlet />
       
