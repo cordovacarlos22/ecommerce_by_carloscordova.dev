@@ -34,7 +34,6 @@ const UserProvider = ({ children }) => {
 
     setToken(token);
     setUser(userData);
-    console.log("user data", userData)
     setRole(userData.role);
     setLogin(true);
   };
