@@ -1,9 +1,16 @@
+/* The code snippet you provided is importing necessary modules and components for the React
+application: */
 import React from 'react'
 import { Link } from 'react-router-dom';
 import ShoppingCart from './ShoppingCart';
 import rightArrowIcon from './../assets/right-arrow.svg'
+/* The `Card` component in the provided code snippet is a functional component in a React application.
+It takes in three props: `id`, `image`, and `product_name`. */
 const Card = ({ id, image, product_name }) => {
   return (
+    /* The `<div>` element with the provided structure in the `Card` component is responsible for
+    rendering a card-like layout for displaying product information. Here's a breakdown of what each
+    part of the structure is doing: */
     <div key={product_name} className="max-w-sm flex flex-col justify-center p-2 items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-2">
       <Link to={`product/${id}`}>
         <img className="rounded-t-lg" src={image} alt={product_name} />

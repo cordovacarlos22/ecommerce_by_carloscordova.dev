@@ -1,7 +1,13 @@
+/* The code snippet is importing necessary modules and components for the `ProductDetail` component in
+a JavaScript React application: */
 import { ProductsContext } from '@/context/useProductsContext';
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import ShoppingCart from './ShoppingCart';
+/* The `import` statement is used in JavaScript to bring in functionality from other modules or files.
+In this case, the code snippet is importing specific components (`Carousel`, `CarouselContent`,
+`CarouselItem`, `CarouselNext`, `CarouselPrevious`) from a file located at
+`"@/components/ui/carousel"`. */
 import {
   Carousel,
   CarouselContent,
@@ -10,8 +16,15 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 
+/* The `ProductDetail` function is a React functional component that displays detailed information
+about a specific product. Here's a breakdown of what the code is doing: */
 const ProductDetail = () => {
+  /* The line `const productArray = useContext(ProductsContext);` in the `ProductDetail` component is
+  utilizing the `useContext` hook from React to access the data stored in the `ProductsContext`. */
   const productArray = useContext(ProductsContext);
+  /* `const { id } = useParams();` is using object destructuring to extract the `id` parameter from the
+  URL using the `useParams` hook provided by `react-router-dom`. This allows the `ProductDetail`
+  component to access the `id` parameter that is part of the URL path. */
   const { id } = useParams();
 
   const product = productArray.products.find((item) => item.id === id);
@@ -43,7 +56,7 @@ const ProductDetail = () => {
         <span className='text-blue-500'>{product.brand}</span>
         <h1 className='font-bold md:text-2xl'>{product.product_name}</h1>
         <p className='md:text-3xl font-bold'>
-        ${product.price}
+          ${product.price}
         </p>
         <p className='font-light md:text-xl'>
           <span className='font-bold'>sku: </span>{product.sku}
@@ -54,7 +67,7 @@ const ProductDetail = () => {
         >
           {product.description}
         </p>
-       
+
 
         {product.isActive ? (
           <ShoppingCart

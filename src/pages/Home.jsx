@@ -1,8 +1,16 @@
+/* The code snippet you provided is importing various modules and components in a JavaScript React
+file. Here's a breakdown of each import statement: */
 import { ProductsContext } from '@/context/useProductsContext'
 import React, { useContext } from 'react'
 import Card from '@/components/Card';
 import SkeletonCard from '@/components/SkeletonCard';
 import LoadingSpinner from '@/components/LoadingSpinner';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+/* The `Home` component in the provided code snippet is a functional component in a JavaScript React
+file. Here's a breakdown of what it does: */
 const Home = () => {
   const productsArray = useContext(ProductsContext);
 
@@ -13,7 +21,10 @@ const Home = () => {
   const skeletons = Array.from({ length: 52 });
 
   return (
-    <main className='flex  flex-wrap justify-center   items-center w-scree gap-2'>
+    /* This block of code in the `Home` component is responsible for rendering different content
+      based on the state of `productsArray.loading`. Here's a breakdown of what it does: */
+    <main className='flex  flex-wrap justify-center   items-center w-screen min-h-screen gap-2'>
+      
       {
         productsArray.loading ?
           (
@@ -59,6 +70,7 @@ const Home = () => {
           )
 
       }
+      <ToastContainer />
     </main>
   )
 };

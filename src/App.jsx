@@ -11,11 +11,14 @@ import Register from './pages/Register'
 import CheckOut from './pages/CheckOut'
 import ProductDetail from './components/ProductDetail'
 import Dashboard from './pages/Dashboard'
-import CreateItem from './components/CreateItem'
+
 
 
 const App = () => {
 
+  /* The `const router = createBrowserRouter([...])` code block is creating a router configuration for
+  the application using the `createBrowserRouter` function provided by the `react-router-dom`
+  library. */
   const router = createBrowserRouter([
     {
       path: '/',
@@ -35,6 +38,7 @@ const App = () => {
       ],
     }
   ])
+  /* The `return` statement in the `App` component is rendering the following structure: */
   return (
     <>
       <UserProvider>
