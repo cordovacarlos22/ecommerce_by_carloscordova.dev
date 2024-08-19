@@ -13,6 +13,7 @@ import ProductDetail from './components/ProductDetail'
 import Dashboard from './pages/Dashboard'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { CartContext } from './context/ShoppingCartContext'
 
 
 const App = () => {
@@ -34,7 +35,7 @@ const App = () => {
         { path: '/product/:id', element: <ProductDetail /> },
         { path: '/dashboard', element: <Dashboard /> },
 
-        
+
 
       ],
     }
@@ -42,12 +43,14 @@ const App = () => {
   /* The `return` statement in the `App` component is rendering the following structure: */
   return (
     <>
-      
+
       <UserProvider>
         <ProductsProvider>
-          <OffertSpan />
-          <ToastContainer />
-          <RouterProvider router={router} />
+          <CartContext>
+            <OffertSpan />
+            <ToastContainer />
+            <RouterProvider router={router} />
+          </CartContext>
         </ProductsProvider>
       </UserProvider>
 
