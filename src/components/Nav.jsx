@@ -9,15 +9,22 @@ import closeMenu from './../assets/close.svg';
 import searchMagnifier from './../assets/search-magnifier.svg';
 import ShoppingCart from './../assets/shopping-cart.svg';
 import { userContext } from '@/context/UserContext';
+import { CartContext } from '@/context/ShoppingCartContext';
 
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 const Nav = () => {
   const itemsContext = useContext(ProductsContext);
+
   const [menuOpen, setMenuOpen] = useState(false);
+
   const UserContext = useContext(userContext);
 
+  const { quantity } = useContext(CartContext);
+
   const { searchTerm, setSearchTerm } = itemsContext
+
   const { login, deleteSession, user,role } = UserContext //* destructure user context
 
   const handleLogOut = () => {
@@ -125,7 +132,7 @@ const Nav = () => {
 
                 src={ShoppingCart} alt='shopping cart' />
               <div className='absolute text-center top-0 right-0  rounded-full bg-yellow-400 min-w-[28px] min-h-[28px]'>
-                <span className=' text-center p-2 '> 100  </span>
+                <span className=' text-center p-2 '> {quantity}  </span>
               </div>
             </NavLink>
           </section>
