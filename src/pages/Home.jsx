@@ -45,7 +45,6 @@ const Home = () => {
           className="bg-gray-50 border capitalize border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           id="categoryFilter"
           name="categoryFilter"
-          defaultValue=''
           value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
           <option disabled value=''>Select category</option>
           <option value="appliances">Appliances</option>
@@ -89,6 +88,10 @@ const Home = () => {
                             url={item.url}
                             image={item.image[0]}
                             product_name={item.product_name}
+                            description={item.description}
+                            price={item.price}
+                            category={item.category}
+                            brand={item.brand}
                           />
                         </article>
                       )
