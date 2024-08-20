@@ -26,6 +26,7 @@ const CreateItem = () => {
   url(), and required(). The schema ensures that the product object must have all these properties
   with the specified validation rules in order to be considered valid. */
   const schema = yup.object({
+    isActive: yup.boolean(true),
     product_name: yup.string().required(),
     description: yup.string().required(),
     price: yup.number().positive().required(),
@@ -156,6 +157,30 @@ const CreateItem = () => {
             </div>
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
               <form onSubmit={handleSubmit(handleCreateItem)} className="space-y-6 capitalize">
+                {/* {is active} */}
+                <div className='hidden'>
+                  <label
+                    htmlFor="isActive"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    product is active
+                  </label>
+                  <select
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    {...register("isActive", { required: true })}
+                    defaultValue="true"
+                  >
+                    <option disabled value='true'>Select true/false</option>
+                    <option value="true">true</option>
+                    <option value="false">false</option>
+                  </select>
+                  {
+                    errors.isActive &&
+                    <div className="border border-red-400 rounded bg-red-100 px-4 py-2 mt-2 text-red-700">
+                        <p>{errors.isActive.message}</p>
+                    </div>
+                  }
+                </div>
                 {/* product name */}
                 <div>
                   <label htmlFor="product_name" className="block text-sm font-medium leading-6 text-gray-900">
@@ -237,6 +262,7 @@ const CreateItem = () => {
                     <option value="appliances">appliances</option>
                     <option value="tv">tv's</option>
                     <option value="computers">computers</option>
+                    <option value="laptops">laptops</option>
                     <option value="tablets">tablets</option>
                     <option value="cellphones">cell phones</option>
                     <option value="audio">audio</option>
