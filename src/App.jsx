@@ -13,7 +13,7 @@ import ProductDetail from './components/ProductDetail'
 import Dashboard from './pages/Dashboard'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { CartContext } from './context/ShoppingCartContext'
+import { CartProvider } from './context/ShoppingCartContext'
 
 
 const App = () => {
@@ -46,11 +46,11 @@ const App = () => {
 
       <UserProvider>
         <ProductsProvider>
-          <CartContext>
+          <CartProvider>
             <OffertSpan />
             <ToastContainer />
             <RouterProvider router={router} />
-          </CartContext>
+          </CartProvider>
         </ProductsProvider>
       </UserProvider>
 
