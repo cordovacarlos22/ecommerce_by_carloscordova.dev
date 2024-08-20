@@ -6,7 +6,10 @@ import ShoppingCart from './ShoppingCart';
 import rightArrowIcon from './../assets/right-arrow.svg'
 /* The `Card` component in the provided code snippet is a functional component in a React application.
 It takes in three props: `id`, `image`, and `product_name`. */
-const Card = ({ id, image, product_name }) => {
+const Card = ({ id, image, product_name, description, price, category, brand }) => {
+
+  //? product props for shopping cart BTN (getting them from home page)
+  const product = {id, image, product_name, description, price, category, brand} 
   return (
     /* The `<div>` element with the provided structure in the `Card` component is responsible for
     rendering a card-like layout for displaying product information. Here's a breakdown of what each
@@ -24,6 +27,7 @@ const Card = ({ id, image, product_name }) => {
           <ShoppingCart
             className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             imgWidth="26"
+            product={product}
           />
           <Link
             to={`product/${id}`}
