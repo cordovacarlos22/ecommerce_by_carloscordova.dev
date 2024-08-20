@@ -107,8 +107,8 @@ const GetAllUsers = () => {
   return (
     <>
 
-      /* This block of code within the `GetAllUsers` component is responsible for conditional rendering
-      based on the values of `localLoading` and `role`. Here's a breakdown of what it does: */
+      {/* /* This block of code within the `GetAllUsers` component is responsible for conditional rendering
+      based on the values of `localLoading` and `role`. Here's a breakdown of what it does:  */}
       {
         localLoading && role == 'ADMIN' ? (<>
           <LoadingSpinner />
