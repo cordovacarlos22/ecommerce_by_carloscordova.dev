@@ -55,7 +55,7 @@ const Home = () => {
           <option value="cellphones">Cell Phones</option>
           <option value="audio">Audio</option>
           <option value="video games">Video Games</option>
-          <option  value=''>reset filter </option>
+          <option value=''>reset filter </option>
         </select>
       </section>
 
@@ -81,7 +81,7 @@ const Home = () => {
                     {filterProducts && filterProducts.map((item) => {
                       return (
 
-                        <article className='flex flex-wrap justify-center items-center   gap-2' key={item.product_name}>
+                        <article className='flex flex-wrap justify-center items-center   gap-2 m-2.5' key={item.product_name}>
                           <Card
                             key={item.id}
                             id={item.id}
