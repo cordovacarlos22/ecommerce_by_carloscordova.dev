@@ -46,7 +46,7 @@ const ProductDetail = () => {
               {/* Iterate over product.image array */}
               {product.image && product.image.map((imgUrl, index) => (
                 <CarouselItem key={index}>
-                  <img src={imgUrl} alt={`${product.product_name} image ${index + 1}`} className="w-full h-auto" />
+                  <img width={550} height={140} src={imgUrl} alt={`${product.product_name} image ${index + 1}`} className="w-full h-auto" />
                 </CarouselItem>
               ))}
             </CarouselContent>

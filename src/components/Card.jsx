@@ -16,7 +16,7 @@ const Card = ({ id, image, product_name, description, price, category, brand }) 
     part of the structure is doing: */
     <div key={product_name} className="w-[470px] h-[470px] flex flex-col justify-center p-2 items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
       <Link to={`product/${id}`}>
-        <img className="rounded-t-lg" src={image} alt={product_name} />
+        <img  className="rounded-t-lg" src={image} alt={product_name} />
       </Link>
       <div className="p-5">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-center text-gray-900 dark:text-white">
