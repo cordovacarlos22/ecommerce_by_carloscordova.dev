@@ -49,7 +49,7 @@ const Home = () => {
           <option disabled value=''>Select category</option>
           <option value="appliances">Appliances</option>
           <option value="tv">TV's</option>
-          <option value="Computers">Computers</option>
+          <option value="computers">Computers</option>
           <option value="laptops">laptops</option>
           <option value="tablets">Tablets</option>
           <option value="cellphones">Cell Phones</option>
