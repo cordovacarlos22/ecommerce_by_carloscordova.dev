@@ -19,7 +19,7 @@ const schema = yup.object({
 const Login = () => {
 
   const navigate = useNavigate();
-  const { setupSession,loading } = useContext(userContext);
+  const { setupSession, loading } = useContext(userContext);
 
   const { register, handleSubmit, formState: { errors } } = useForm(
     {
